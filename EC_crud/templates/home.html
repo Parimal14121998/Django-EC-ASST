@@ -1,0 +1,64 @@
+<html>
+<head>
+<title> EC APPP</title>
+<style>
+.nav{background-color:yellow;}
+.nav a {color:black;text-decoration:None;margin:70px;}
+thead th{background:skyblue; }
+
+
+</style>
+</head>
+
+<body>
+<center>
+<div class ="nav">
+<a href="{% url 'home'   %}">Home</a>
+<a href="{% url  'create'  %}">Create</a>
+<a href="{% url  'ulogout'  %}"> Logout</a>
+<a href ={% url 'cp' %}> Change password</a>
+</div>
+<h1>HOME PAGE</h1>
+<h1>Welcome, {{ request.user.username }}!</h1>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<br><br>
+<table border ="2" style="width:50%;">
+<thead>  
+<tr>
+<th>Name</th>
+<th>Gender</th>
+<th>Height</th>
+<th>Weight</th>
+<th>BMI</th>
+<th>Delete</th>
+<th>Update</th>
+</tr>
+</thead>
+{% for d in data %}
+<tr style="text-align : center;"> 
+<th>{{ d.Fullname }}</th>
+<th>{{ d.gender }}</th>
+<th>{{ d.height }}</th>
+<th>{{ d.weight }}</th>
+<th>{{ d.bmi }}</th>
+<th><a href = "{% url 'remove'  k=d.id    %}" onclick="return confirm('Are you sure ??')" >DELETE </a></th>
+<th><a href = "{% url 'update'  k=d.id    %}" >UPDATE</a></th>
+
+</tr>
+
+{% empty %}
+<tr style="text-align : center;">
+<td colspan ="4"> "No student exists" </td>
+</tr>
+{% endfor %}
+</table>
+</center>
+</body>
+</html>

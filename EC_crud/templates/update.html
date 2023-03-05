@@ -1,0 +1,12 @@
+<center>
+<h1>Update BMI</h1>
+<form method="POST">
+    {% csrf_token %}
+    <table border = "1" >
+        {{ form.as_table }}
+
+    </table>
+    
+    <button type="submit">Update</button>
+</form>
+</center>
